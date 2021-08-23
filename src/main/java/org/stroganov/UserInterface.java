@@ -17,7 +17,7 @@ public class UserInterface {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             expressionString = reader.readLine();
             if (!isExpressionValid(expressionString)) {
-                throw new InputExpressionException("Ошибка синтаксиса в выражении");
+                throw new InputExpressionException("Ошибка синтаксиса в выражении: " + expressionString);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -26,14 +26,14 @@ public class UserInterface {
     }
 
     public boolean isExpressionValid(String expression) {
-        return expression != null && !expression.equals("") && !expression.matches("[a-zA-Z]");
+        return expression != null && !expression.equals("");
     }
 
     public void showInputMessage() {
         System.out.println(INPUT_MESSAGE);
     }
 
-    public void showOutputMessage(String calculatedString) {
+    public void showOutputMessage(double calculatedString) {
         System.out.println(OUTPUT_MESSAGE + calculatedString);
     }
 

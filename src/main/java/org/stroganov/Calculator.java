@@ -4,8 +4,8 @@ import java.util.Stack;
 
 public class Calculator {
 
-    public int calculatePostfixExpression(String postFixString) {
-        int calculatedResult;
+    public double calculatePostfixExpression(String postFixString) {
+        double calculatedResult;
         Stack<String> stringStack = new Stack<>();
         String[] pastFixExpressionBuffer = postFixString.split(" ");
 
@@ -13,42 +13,45 @@ public class Calculator {
             switch (nextString) {
 
                 case "*": {
-                    int first = Integer.parseInt(stringStack.pop());
-                    int second = Integer.parseInt(stringStack.pop());
-                    int result = first * second;
+                    double first = Double.parseDouble(stringStack.pop());
+                    double second = Double.parseDouble(stringStack.pop());
+                    double result = first * second;
                     stringStack.push(String.valueOf(result));
                     break;
                 }
                 case "/": {
-                    int first = Integer.parseInt(stringStack.pop());
-                    int second = Integer.parseInt(stringStack.pop());
-                    int result = first / second;
+                    double first = Double.parseDouble(stringStack.pop());
+                    double second = Double.parseDouble(stringStack.pop());
+                    double result = first / second;
                     stringStack.push(String.valueOf(result));
                     break;
                 }
                 case "+": {
-                    int first = Integer.parseInt(stringStack.pop());
-                    int second = Integer.parseInt(stringStack.pop());
-                    int result = first + second;
+                    double first = Double.parseDouble(stringStack.pop());
+                    double second = Double.parseDouble(stringStack.pop());
+                    double result = first + second;
                     stringStack.push(String.valueOf(result));
                     break;
                 }
                 case "-": {
-                    int first = Integer.parseInt(stringStack.pop());
-                    int second = Integer.parseInt(stringStack.pop());
-                    int result = second - first;
+                    double first = Double.parseDouble(stringStack.pop());
+                    double second = Double.parseDouble(stringStack.pop());
+                    double result = second - first;
                     stringStack.push(String.valueOf(result));
                     break;
                 }
                 default: {
+                    if (nextString.contains("sqrt")) {
+                        double sqrtParameter = Double.parseDouble(nextString.split("sqrt")[1]);
+                        nextString = String.valueOf(Math.sqrt(sqrtParameter));
+                    }
                     stringStack.push(nextString);
                 }
             }
         }
-        calculatedResult = Integer.parseInt(stringStack.pop());
+        calculatedResult = Double.parseDouble(stringStack.pop());
         return calculatedResult;
     }
-
 
     public String getPostfixExpression(String expressionString) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -60,10 +63,7 @@ public class Calculator {
                 case ("+"):
                 case ("-"): {
                     while (!stringStack.isEmpty()) {
-                        //String stringTopStack = stringStack.peek();
-                        //  if (stringTopStack.equals("*") && stringTopStack.equals("/")) {
                         stringBuilder.append(stringStack.pop()).append(" ");
-                        //  }
                     }
                     stringStack.push(nextString);
                     break;
@@ -83,5 +83,4 @@ public class Calculator {
         }
         return stringBuilder.toString().trim();
     }
-
 }
