@@ -6,12 +6,13 @@ import org.junit.Test;
 
 public class CalculatorTest {
 
-    String testString = "10 + 2 * 8 - 3";
-    Calculator calculator = new Calculator();
+    String testString;
+    Calculator calculator;
 
     @Before
     public void setUp() throws Exception {
-
+        testString = "10 + 2 * 8 - 3";
+        calculator = new Calculator();
     }
 
     @Test
