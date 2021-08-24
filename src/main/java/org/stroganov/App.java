@@ -1,6 +1,10 @@
 package org.stroganov;
 
+import org.stroganov.exeptions.DivisionByZeroException;
 import org.stroganov.exeptions.InputExpressionException;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 /**
  * Hello world!
@@ -11,11 +15,12 @@ public class App {
         userInterface.showInputMessage();
         double result;
         Calculator calculator = new Calculator();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
-            String postfixExpression = calculator.getPostfixExpression(userInterface.getValidExpressionFromUser());
+            String postfixExpression = calculator.getPostfixExpression(userInterface.getValidExpressionFromUser(reader));
             result = calculator.calculatePostfixExpression(postfixExpression);
             userInterface.showOutputMessage(result);
-        } catch (InputExpressionException e) {
+        } catch (InputExpressionException | DivisionByZeroException e) {
             userInterface.showErrorMessage(e.getMessage());
         }
     }

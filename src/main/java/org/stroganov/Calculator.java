@@ -1,11 +1,14 @@
 package org.stroganov;
 
+import org.stroganov.exeptions.DivisionByZeroException;
+
 import java.util.Stack;
 
 public class Calculator {
 
-    public double calculatePostfixExpression(String postFixString) {
-        double calculatedResult;
+    public static final String DIVISION_BY_ZERO_STRING = "Попытка деления на ноль числа ";
+
+    public double calculatePostfixExpression(String postFixString) throws DivisionByZeroException {
         Stack<String> stringStack = new Stack<>();
         String[] pastFixExpressionBuffer = postFixString.split(" ");
 
@@ -15,28 +18,28 @@ public class Calculator {
                 case "*": {
                     double first = Double.parseDouble(stringStack.pop());
                     double second = Double.parseDouble(stringStack.pop());
-                    double result = first * second;
+                    double result = multiple(first, second);
                     stringStack.push(String.valueOf(result));
                     break;
                 }
                 case "/": {
                     double first = Double.parseDouble(stringStack.pop());
                     double second = Double.parseDouble(stringStack.pop());
-                    double result = first / second;
+                    double result = division(first, second);
                     stringStack.push(String.valueOf(result));
                     break;
                 }
                 case "+": {
                     double first = Double.parseDouble(stringStack.pop());
                     double second = Double.parseDouble(stringStack.pop());
-                    double result = first + second;
+                    double result = addition(first, second);
                     stringStack.push(String.valueOf(result));
                     break;
                 }
                 case "-": {
                     double first = Double.parseDouble(stringStack.pop());
                     double second = Double.parseDouble(stringStack.pop());
-                    double result = second - first;
+                    double result = subtraction(second, first);
                     stringStack.push(String.valueOf(result));
                     break;
                 }
@@ -49,8 +52,7 @@ public class Calculator {
                 }
             }
         }
-        calculatedResult = Double.parseDouble(stringStack.pop());
-        return calculatedResult;
+        return Double.parseDouble(stringStack.pop());
     }
 
     public String getPostfixExpression(String expressionString) {
@@ -67,7 +69,6 @@ public class Calculator {
                     }
                     stringStack.push(nextString);
                     break;
-
                 }
                 case ("*"):
                 case ("/"): {
@@ -82,5 +83,24 @@ public class Calculator {
             stringBuilder.append(stringStack.pop()).append(" ");
         }
         return stringBuilder.toString().trim();
+    }
+
+    public double multiple(double firstNumber, double secondNumber) {
+        return firstNumber * secondNumber;
+    }
+
+    public double division(double firstNumber, double secondNumber) throws DivisionByZeroException {
+        if (secondNumber == 0) {
+            throw new DivisionByZeroException(DIVISION_BY_ZERO_STRING + firstNumber);
+        }
+        return firstNumber / secondNumber;
+    }
+
+    public double addition(double firstNumber, double secondNumber) {
+        return firstNumber + secondNumber;
+    }
+
+    public double subtraction(double firstNumber, double secondNumber) {
+        return firstNumber - secondNumber;
     }
 }

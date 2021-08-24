@@ -12,9 +12,9 @@ public class UserInterface {
     public static final String OUTPUT_MESSAGE = "Результат выражения ";
     public static final String ERROR_MESSAGE = "Вы ввели не валидное выражение ";
 
-    public String getValidExpressionFromUser() throws InputExpressionException {
+    public String getValidExpressionFromUser(BufferedReader reader) throws InputExpressionException {
         String expressionString = " ";
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+        try {
             expressionString = reader.readLine();
             if (!isExpressionValid(expressionString)) {
                 throw new InputExpressionException("Ошибка синтаксиса в выражении: " + expressionString);
