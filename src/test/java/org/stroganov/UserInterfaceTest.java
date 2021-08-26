@@ -1,6 +1,5 @@
 package org.stroganov;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -23,20 +22,11 @@ public class UserInterfaceTest {
 
     @Test(expected = Exception.class)
     public void getValidExpressionFromUser_Throw_InputExpressionException_Test() throws InputExpressionException, IOException {
-        Mockito.when(reader.readLine()).thenReturn("");
-        userInterface.getValidExpressionFromUser(reader);
+        Mockito.when(reader.readLine()).thenReturn(null);
+        userInterface.getStringFromUser(reader);
     }
 
-    @Test
 
-    public void isExpressionValid_False_WhenEmptyString() {
-        Assert.assertFalse(userInterface.isExpressionValid(""));
-    }
-
-    @Test
-    public void isExpressionValidStringNull() {
-        Assert.assertFalse(userInterface.isExpressionValid(null));
-    }
 
 
 }

@@ -15,33 +15,27 @@ public class CalculatorTest {
     @InjectMocks
     Calculator calculator;
 
+
     @Before
     public void setUp() throws Exception {
         testString = "10 + 2 * 8 - 3";
     }
 
-    @Test
-    public void getPostfixExpressionTest() {
-        //GIVEN
-        String expected = "10 2 8 * + 3 -";
-        // WHEN
-        String actual = calculator.getPostfixExpression(testString);
-        //THEN
-        Assert.assertEquals(expected, actual);
-    }
+
 
     @Test
     public void calculatePostfixExpressionTest() throws DivisionByZeroException {
         //GIVEN
         double expected = 23;
+        String inputString = "10 2 8 * + 3 -";
         // WHEN
-        double actual = calculator.calculatePostfixExpression(calculator.getPostfixExpression(testString));
+        double actual = calculator.calculatePostfixExpression(inputString);
         //THEN
         Assert.assertEquals(expected, actual, 0.001);
     }
 
     @Test
-    public void multipleDoubleTest() {
+    public void multipleTwoDoubleNumbersTest() {
         //GIVEN
         double expected = 100;
         // WHEN
@@ -51,7 +45,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void divisionTest() throws DivisionByZeroException {
+    public void divisionTwoDoubleNumbersTest() throws DivisionByZeroException {
         //GIVEN
         double expected = 2;
         // WHEN
@@ -68,7 +62,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void additionTest() {
+    public void addition_ReturnSUM_Two_Number_Test() {
         //GIVEN
         double expected = 24;
         // WHEN
@@ -78,7 +72,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void subtractionTest() {
+    public void subtraction_Return_Subtraction_TWO_Numbers_Test() {
         //GIVEN
         double expected = 0;
         // WHEN

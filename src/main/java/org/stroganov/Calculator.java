@@ -46,7 +46,7 @@ public class Calculator {
                 default: {
                     if (nextString.contains("sqrt")) {
                         double sqrtParameter = Double.parseDouble(nextString.split("sqrt")[1]);
-                        nextString = String.valueOf(Math.sqrt(sqrtParameter));
+                        nextString = String.valueOf(sqrt(sqrtParameter));
                     }
                     stringStack.push(nextString);
                 }
@@ -55,35 +55,7 @@ public class Calculator {
         return Double.parseDouble(stringStack.pop());
     }
 
-    public String getPostfixExpression(String expressionString) {
-        StringBuilder stringBuilder = new StringBuilder();
-        Stack<String> stringStack = new Stack<>();
-        String[] expressionBuffer = expressionString.split(" ");
 
-        for (String nextString : expressionBuffer) {
-            switch (nextString) {
-                case ("+"):
-                case ("-"): {
-                    while (!stringStack.isEmpty()) {
-                        stringBuilder.append(stringStack.pop()).append(" ");
-                    }
-                    stringStack.push(nextString);
-                    break;
-                }
-                case ("*"):
-                case ("/"): {
-                    stringStack.push(nextString);
-                    break;
-                }
-                default:
-                    stringBuilder.append(nextString).append(" ");
-            }
-        }
-        while (!stringStack.isEmpty()) {
-            stringBuilder.append(stringStack.pop()).append(" ");
-        }
-        return stringBuilder.toString().trim();
-    }
 
     public double multiple(double firstNumber, double secondNumber) {
         return firstNumber * secondNumber;
@@ -102,5 +74,9 @@ public class Calculator {
 
     public double subtraction(double firstNumber, double secondNumber) {
         return firstNumber - secondNumber;
+    }
+
+    public double sqrt(double number) {
+        return Math.sqrt(number);
     }
 }

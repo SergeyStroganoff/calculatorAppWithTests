@@ -16,8 +16,12 @@ public class App {
         double result;
         Calculator calculator = new Calculator();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        StringValidate stringValidator = new StringValidator();
+        StringFormatter stringFormatter = new StringFormatter();
         try {
-            String postfixExpression = calculator.getPostfixExpression(userInterface.getValidExpressionFromUser(reader));
+            String stringFromUser = userInterface.getStringFromUser(reader);
+            stringValidator.IsStringArithmeticExpression(stringFromUser);
+            String postfixExpression = stringFormatter.getPostfixExpression(stringFromUser);
             result = calculator.calculatePostfixExpression(postfixExpression);
             userInterface.showOutputMessage(result);
         } catch (InputExpressionException | DivisionByZeroException e) {
