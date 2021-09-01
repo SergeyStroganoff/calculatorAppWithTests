@@ -20,7 +20,7 @@ public class App {
         StringFormatter stringFormatter = new StringFormatter();
         try {
             String stringFromUser = userInterface.getStringFromUser(reader);
-            stringValidator.IsStringArithmeticExpression(stringFromUser);
+            stringValidator.isStringArithmeticExpression(stringFromUser);
             String postfixExpression = stringFormatter.getPostfixExpression(stringFromUser);
             result = calculator.calculatePostfixExpression(postfixExpression);
             userInterface.showOutputMessage(result);

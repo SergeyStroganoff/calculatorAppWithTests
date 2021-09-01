@@ -17,7 +17,7 @@ public class StringValidatorTest {
         //GIVEN
         String testString = "";
         // WHEN
-        boolean test = stringValidator.IsStringArithmeticExpression(testString);
+        boolean test = stringValidator.isStringArithmeticExpression(testString);
         //THEN Throw Exception
     }
 }
